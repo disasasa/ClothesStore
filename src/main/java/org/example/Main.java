@@ -41,7 +41,7 @@ public class Main extends AdminConsole {
                         System.out.println("create new password");
                         String Password = sc.nextLine();
 
-                        if(checkUser(con, Name, Password)) {
+                        if(checkUser(con, Name, Password)) {#checks if user exists
                             System.out.println("New user was created");
                         } else {
                             System.out.println("User is already created");
