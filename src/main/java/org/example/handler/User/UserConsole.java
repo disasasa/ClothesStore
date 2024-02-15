@@ -1,4 +1,6 @@
-package org.example.handler;
+package org.example.handler.User;
+
+import org.example.handler.HandleDB;
 
 import java.sql.*;
 import java.util.ArrayList;

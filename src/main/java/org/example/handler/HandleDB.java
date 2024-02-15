@@ -1,13 +1,13 @@
 package org.example.handler;
 
-import org.example.AdminMethods;
-import org.example.UserMethods;
+import org.example.handler.Admin.AdminMethods;
+import org.example.handler.User.UserMethods;
 import org.example.model.Clothes;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class HandleDB implements UserMethods, AdminMethods {
+public class HandleDB implements HandleAdminMethods, HandleUserMethods {
     @Override
     public ArrayList<String> Select(Connection con) throws SQLException {
         ArrayList<String> clothesArr = new ArrayList<>();

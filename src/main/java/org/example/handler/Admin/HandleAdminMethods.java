@@ -1,4 +1,4 @@
-package org.example;
+package org.example.handler.Admin;
 
 import java.sql.Connection;
 import java.sql.SQLException;
