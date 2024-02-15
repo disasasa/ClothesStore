@@ -1,13 +1,10 @@
 package org.example.handler.Admin;
 
-import org.example.handler.HandleDB;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.Scanner;
 
-public class AdminConsole extends HandleDB {
+public class AdminConsole extends HandleAdminDB {
     Scanner sc = new Scanner(System.in);
     public void polling(Connection con) {
         while(true) {

@@ -1,12 +1,11 @@
 package org.example.handler.User;
 
-import org.example.handler.HandleDB;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserConsole extends HandleDB {
+public class UserConsole extends HandleUserDB {
     Scanner sc = new Scanner(System.in);
     public void polling(Connection con) {
         while(true) {
@@ -66,7 +65,7 @@ public class UserConsole extends HandleDB {
             }
             System.out.println(message);
             String chooce = sc.nextLine();
-            HandleDB handler = new HandleDB();
+            HandleUserDB handler = new HandleUserDB();
             System.out.println(handler.Select(con,column,chooce));
         } catch(SQLException e) {
             System.out.println(e.getMessage());
@@ -77,20 +76,21 @@ public class UserConsole extends HandleDB {
     private static ArrayList<String> SelectByDiapason(Connection con) throws SQLException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Select a price diapason");
-        String MaxQuery = "SELECT FROM clothes ORDER BY price DESC LIMIT 1;";
-        String MinQuery = "SELECT FROM clothes ORDER BY price ASC LIMIT 1;";
+        String MaxQuery = "SELECT * FROM clothes ORDER BY price DESC LIMIT 1;";
+        String MinQuery = "SELECT * FROM clothes ORDER BY price ASC LIMIT 1;";
         Statement stmt = con.createStatement();
         ResultSet maxrs = stmt.executeQuery(MaxQuery);
-        ResultSet minrs = stmt.executeQuery(MinQuery);
+        Statement stmt2 = con.createStatement(); // Create a new Statement object for the second query
+        ResultSet minrs = stmt2.executeQuery(MinQuery);
         maxrs.next();
         minrs.next();
         int max = maxrs.getInt("price");
         int min = minrs.getInt("price");
-        System.out.println(String.format("The most Expensive - %s, The Cheapest - %s",max,min));
-        System.out.println("Max - \n");
+        System.out.println(String.format("The most Expensive - %s, The Cheapest - %s", max, min));
+        System.out.println("Max - ");
         int MAX = Integer.parseInt(sc.nextLine());
-        System.out.println("Min - \n");
+        System.out.println("Min - ");
         int MIN = Integer.parseInt(sc.nextLine());
-        return new HandleDB().Select(con,MIN,MAX);
+        return new HandleUserDB().Select(con, MIN, MAX);
     }
 }

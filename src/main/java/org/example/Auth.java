@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Authorise {
+public class Auth {
     public static void Auth(Connection con) throws SQLException {
         Scanner sc = new Scanner(System.in);
         while(true) { // authentication

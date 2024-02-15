@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.data.ConnectionDB;
-import org.example.handler.Admin.AdminConsole;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -12,7 +11,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         try {
             Connection con = ConnectionDB.Connect(); // get connection
-            Authorise.Auth(con); // authorisation
+            Auth.Auth(con); // authorisation
         } catch(SQLException e) { // Logging the exceptions
             System.out.println("connection error: " + e.getMessage());
         } catch (ClassNotFoundException e) {
