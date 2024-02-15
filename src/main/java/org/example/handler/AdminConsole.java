@@ -4,20 +4,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Scanner;
-// AdminConsole class inherits from HandleDB to use database operation methods.
+
 public class AdminConsole extends HandleDB{
     Scanner sc = new Scanner(System.in);
     public void polling(Connection con) {
         while(true) {
             try {
-                // Displays the available actions to the admin.
                 System.out.println("select actions:\n1 - select all clothes\n2 - create new clothes\n3 - update clothes\n4 - delete clothes\n");
                 String chooce = sc.nextLine(); // do not use nextInt() as it cause a problem with IOStream
-                switch(chooce) {// Switch statement to handle the admin's choice
-                    case "1":// Displays all clothes items by calling the Select method from HandleDB.
+                switch(chooce) {
+                    case "1":
                         System.out.println(Select(con));
                         break;
-                    case "2":// Prompts the admin to enter details for a new clothing item and creates it using the Create method.
+                    case "2":
                         System.out.println("enter a brand");
                         String brand = sc.nextLine();
                         System.out.println("enter a model");
@@ -32,7 +31,7 @@ public class AdminConsole extends HandleDB{
                         int price = Integer.parseInt(sc.nextLine());
                         Create(con,brand,model,type,color,size,price);
                         break;
-                    case "3":// Updates clothing items based on the admin's input, offering an option to update all or specific items.
+                    case "3":
                         System.out.println("which column to choose - brand, model, type, color, size, price");
                         String column = sc.nextLine();
                         System.out.println("enter a value");
@@ -49,13 +48,13 @@ public class AdminConsole extends HandleDB{
                             Update(con,column,value,targetColumn,targetValue);
                         }
                         break;
-                    case "4":// Deletes a clothing item based on the ID provided by the admin.
+                    case "4":
                         System.out.println("enter an ID");
                         int id = Integer.parseInt(sc.nextLine());
                         Delete(con,id);
                         break;
                 }
-            } catch (SQLException e) {// Catches and prints any SQLException that occurs during database operations
+            } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
         }

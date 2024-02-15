@@ -4,10 +4,7 @@ import org.example.AdminMethods;
 import org.example.UserMethods;
 import org.example.model.Clothes;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class HandleDB implements UserMethods, AdminMethods {
@@ -65,6 +62,29 @@ public class HandleDB implements UserMethods, AdminMethods {
             System.out.println("No rows found.");
             return null;
         }
+    }
+
+    @Override
+    public ArrayList<String> Select(Connection con, int min, int max) throws SQLException {
+        ArrayList<String> result = new ArrayList<>();
+        String query = "SELECT * FROM clothes WHERE price BETWEEN ? AND ?";
+        PreparedStatement STMT = con.prepareStatement(query);
+        STMT.setInt(1,min);
+        STMT.setInt(2,max);
+        ResultSet resultSet = STMT.executeQuery();
+        while(resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String brand = resultSet.getString("brand");
+            String model = resultSet.getString("model");
+            String type = resultSet.getString("type");
+            String color = resultSet.getString("color");
+            String size = resultSet.getString("size");
+            int price = resultSet.getInt("price");
+
+            Clothes clothes = new Clothes(id,brand,model,type,color,size,price);
+            result.add(clothes.toString());
+        }
+        return result;
     }
 
     @Override
